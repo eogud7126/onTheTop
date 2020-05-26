@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.item_boardlist.view.*
 class MainActivity : AppCompatActivity() {
 
     private var boardList = arrayListOf<Board>(
-        Board("세긋", "시발", 4,"","2020-05-26"),
-        Board("세긋", "시발", 4,"","2020-05-26"),
-        Board("섹스", "시발", 4,"","2020-05-26"),
-        Board("세긋", "시발", 4,"","2020-05-26"),
-        Board("세긋", "시발", 4,"","2020-05-26"),
-        Board("세긋", "시발", 4,"","2020-05-26")
+        Board("1", "a", 4,"","2020-05-26"),
+        Board("2", "b", 4,"","2020-05-26"),
+        Board("3", "c", 4,"","2020-05-26"),
+        Board("4", "d", 4,"","2020-05-26"),
+        Board("5", "e", 4,"","2020-05-26"),
+        Board("6", "f", 4,"","2020-05-26")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
