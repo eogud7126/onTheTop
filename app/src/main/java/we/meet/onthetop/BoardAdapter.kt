@@ -8,15 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BoardAdapter(val context: Context, val boardList: ArrayList<Board>):
-    RecyclerView.Adapter<BoardAdapter.Holder>(){
+class BoardAdapter(private val context: Context, private val boardList: ArrayList<Board>, val itemClick: (Board)->Unit ): RecyclerView.Adapter<BoardAdapter.Holder>(){
 
-        inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView){
-            val boardImg = itemView?.findViewById<ImageView>(R.id.boardImg)
-            val boardTitle = itemView?.findViewById<TextView>(R.id.boardTittleTv)
-            val boardSub = itemView?.findViewById<TextView>(R.id.boardSubTv)
-            val boardDate = itemView?.findViewById<TextView>(R.id.boardDateTv)
-            val boardCommentCnt = itemView?.findViewById<TextView>(R.id.boardCommentTv)
+        inner class Holder(itemView: View, itemClick: (Board) -> Unit): RecyclerView.ViewHolder(itemView){
+            private val boardImg = itemView.findViewById<ImageView>(R.id.boardImg)
+            private val boardTitle = itemView.findViewById<TextView>(R.id.boardTitleTv)
+            private val boardSub = itemView.findViewById<TextView>(R.id.boardSubTv)
+            private val boardDate = itemView.findViewById<TextView>(R.id.boardDateTv)
+            private val boardCommentCnt = itemView.findViewById<TextView>(R.id.boardCommentTv)
 
             fun bind(board: Board, context: Context) {
                 if (board.boardImage != "") {
@@ -33,13 +32,16 @@ class BoardAdapter(val context: Context, val boardList: ArrayList<Board>):
                 boardSub?.text = board.subTitle
                 boardDate?.text = board.date
                 boardCommentCnt?.text = board.commentCnt.toString()
+
+                itemView.setOnClickListener { itemClick(board) }
             }
+
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         //화면을 최초 로딩하여 만들어진 View가 없는 경우, xml파일을 inflate하여 ViewHolder를 생성한다.
         val view = LayoutInflater.from(context).inflate(R.layout.item_boardlist,parent,false)
-        return Holder(view)
+        return Holder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
